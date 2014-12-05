@@ -7,15 +7,21 @@
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <h1>Contacts</h1>
-		<div ng-controller="addressBookController as abCtrl">	
+    <h1>Address Book</h1>
+	<div ng-controller="addressBookController as abCtrl">	
 		<form name="newContactForm" ng-submit="newContactForm.$valid && abCtrl.addNewContact()">
+	  <div class="form-group">	
       <label > Name:</label>
-         <input type="text" ng-model="abCtrl.newContact.name" require> 
+         <input type="text" ng-model="abCtrl.newContact.name">
+      </div>
+      <div class="form-group">
       <label > Email: </label>
-        <input type="text" ng-model="abCtrl.newContact.email" require>
+        <input type="text" ng-model="abCtrl.newContact.email">
+      </div>
+      <div class="form-group">
       <label >  Phone:  </label>
        <input type="text" ng-model="abCtrl.newContact.phone">
+      </div>
       <input type="submit" value="Add Contact" ng-disabled="newContactForm.$invalid" >
     </form>
     <table>
@@ -29,9 +35,11 @@
       </thead>
       <tbody>
         <tr ng-repeat="contact in abCtrl.contacts">
+          <td><img class="ab-img" ng-src="{{contact.image}}"></td>
           <td>{{contact.name}}</td>
           <td>{{contact.email}}</td>
           <td>{{contact.phone}}</td>
+          <td><button ng-click="abCtrl.removeContact(contact)">Delete</button></td>
         </tr>
       </tbody>
     </table>
