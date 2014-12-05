@@ -1,7 +1,7 @@
 ;(function (){
   'use strict';
 
-  angular.module('addressBook', []) {
+  angular.module('addressBook', [])
     .controller('addressBookController', function(){
       var vm = this;
 
@@ -19,11 +19,9 @@
       ];
 
       vm.addNewContact = function(){
-        vm.contacts.push(vm.newContact)
+        vm.contacts.push(vm.newContact);
       }
 
 
     })
-  }
-
 })();
