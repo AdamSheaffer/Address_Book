@@ -9,5 +9,10 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "authors": [
+    "Stephania <stephania07>"
+  ],
+  "main": "index.html",
+  "private": true
 }
