@@ -1,0 +1,13 @@
+{
+  "name": "Address_Book",
+  "version": "0.0.0",
+  "homepage": "https://github.com/AdamSheaffer/Address_Book",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
