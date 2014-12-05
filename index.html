@@ -8,30 +8,34 @@
   </head>
   <body>
     <h1>Contacts</h1>
-    <form>
-      <label>
-        Name: <input type="text">
-        Email: <input type="email">
-        Phone: <input type="tel" name="" id="">
-      </label>
+		<div ng-controller="addressBookController as abCtrl">	
+		<form name="newContactForm" ng-submit="newContactForm.$valid && abCtrl.addNewContact()">
+      <label > Name:</label>
+         <input type="text" ng-model="abCtrl.newContact.name" require> 
+      <label > Email: </label>
+        <input type="text" ng-model="abCtrl.newContact.email" require>
+      <label >  Phone:  </label>
+       <input type="text" ng-model="abCtrl.newContact.phone">
+      <input type="submit" value="Add Contact" ng-disabled="newContactForm.$invalid" >
     </form>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Email</th>
-          <th>Phone</th>
+          <th>Phone</th>   
         </tr>
+        </thead>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr ng-repeat="contact in abCtrl.contacts">
+          <td>{{contact.name}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.phone}}</td>
         </tr>
       </tbody>
     </table>
-
+  </div>
   <script src='bower_components/jquery/dist/jquery.min.js'></script>
   <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
   <script src='bower_components/angularjs/angular.min.js'></script>
