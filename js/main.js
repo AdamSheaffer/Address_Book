@@ -17,12 +17,27 @@
           email: 'stephaniaiyob@gmail.com',
           phone: '202-569-3450',
           image: 'https://avatars3.githubusercontent.com/u/9039275?v=3&s=460'
-        }
+        },
+        {
+          name: 'Steve Jobs',
+          email: 'stevejobs@gmail.com',
+          phone: '123-456-789',
+          image: 'http://i.imgur.com/ZOjAIb.jpg'
+        },
+        {
+          name: 'Paulo Coelho',
+          email: 'pauloc@gmail.com',
+          phone: '123-456-789',
+          image: 'http://i.imgur.com/7jpxQxLb.jpg'
+        },
+
       ];
+      
 
       vm.addNewContact = function(){
         vm.contacts.push(vm.newContact);
-		 	  console.log("add new contact is firing. new info is:" + vm.newContact.name);
+        vm.newContact = null;
+		 	  //console.log("add new contact is firing. new info is:" + vm.newContact.name);
       };
      
      vm.removeContact = function(contact){
@@ -30,9 +45,6 @@
        vm.contacts.splice(index, 1);
 
      }
-
-     vm.newContact = {}
-
-
+      vm.newContact = {}
     })
 })();

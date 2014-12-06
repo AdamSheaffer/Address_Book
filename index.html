@@ -13,7 +13,7 @@
 	<div class="container" ng-controller="addressBookController as abCtrl">	
 		<form name="newContactForm" ng-submit="newContactForm.$valid && abCtrl.addNewContact()" novalidate>
 	  <div class="col-xs-4">	
-      <label> Name:</label>
+      <label class="control-label"> Name:</label>
          <input class="form-control" type="text" ng-model="abCtrl.newContact.name">
       </div>
       <div class="col-xs-4">
@@ -24,7 +24,7 @@
       <label class="control-label">  Phone:  </label>
        <input class="form-control" type="text" ng-model="abCtrl.newContact.phone">
       </div>
-      <input type="submit" class="btn btn-success" value="Add Contact" >
+        <input type="submit" class="btn btn-success" value="Add Contact" ng-show="newContactForm.$valid"/>
     </form>
     <div class="table-responsive">
     <table class="table table-striped">
@@ -37,7 +37,6 @@
           <th>Delete</th>  
         </tr>
         </thead>
-      </thead>
       <tbody>
         <tr ng-repeat="contact in abCtrl.contacts">
           <td><img class="ab-img" ng-src="{{contact.image}}"></td>

@@ -4,5 +4,9 @@
   border-radius: 100%;
 }
 h1 {
+	background-color: lightblue;
+	border-radius: 5px;
+	font-family: Tahoma;
+	margin: 1em 3.5em;
 	text-align: center;
 }
