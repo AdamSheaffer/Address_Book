@@ -38,17 +38,17 @@
         </tr>
         </thead>
       <tbody>
-        <tr ng-repeat="contact in abCtrl.contacts">
+        <tr ng-repeat="(contactId, contact) in abCtrl.contacts">
           <td><img class="ab-img" ng-src="{{contact.image}}"></td>
           <td>{{contact.name}}</td>
           <td>{{contact.email}}</td>
           <td>{{contact.phone}}</td>
-          <td><button ng-click="abCtrl.removeContact(contact)">Delete</button></td>
+          <td><button ng-click="abCtrl.removeContact(contactId)">Delete</button></td>
         </tr>
       </tbody>
     </table>
     </div>
-  </div>
+	</div>
   <script src='bower_components/jquery/dist/jquery.min.js'></script>
   <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
   <script src='bower_components/angularjs/angular.min.js'></script>
