@@ -14,7 +14,7 @@
         },
         {
           name: 'Stephania Iyob',
-          email: 'Stephaniaiyob@gmail.com',
+          email: 'stephaniaiyob@gmail.com',
           phone: '202-569-3450',
           image: 'https://avatars3.githubusercontent.com/u/9039275?v=3&s=460'
         }
