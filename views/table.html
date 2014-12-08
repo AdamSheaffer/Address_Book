@@ -1,0 +1,21 @@
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th> 
+          <th>Delete</th>  
+        </tr>
+        </thead>
+      <tbody>
+        <tr ng-repeat="(contactId, contact) in ab.contacts">
+          <td><img class="ab-img" ng-src="{{contact.image}}"></td>
+          <td>{{contact.name}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.phone}}</td>
+          <td><a class="btn btn-primary" href="/#/{{contactId}}">Show</a>
+         <button ng-click="ab.removeContact(contactId)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>

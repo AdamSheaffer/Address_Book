@@ -10,48 +10,17 @@
   </head>
   <body>
     <h1>Address Book</h1>
-	<div class="container" ng-controller="addressBookController as abCtrl">	
-		<form name="newContactForm" ng-submit="newContactForm.$valid && abCtrl.addNewContact()" novalidate>
-	  <div class="col-xs-4">	
-      <label class="control-label"> Name:</label>
-         <input class="form-control" type="text" ng-model="abCtrl.newContact.name" >
-      </div>
-      <div class="col-xs-4">
-      <label class="control-label"> Email: </label>
-        <input class="form-control" type="text" ng-model="abCtrl.newContact.email" >
-      </div>
-      <div class="col-xs-4">
-      <label class="control-label">  Phone:  </label>
-       <input class="form-control" type="text" ng-model="abCtrl.newContact.phone">
-      </div>
-        <input type="submit" class="btn btn-success" value="Add Contact" ng-show="newContactForm.$valid"/>
-    </form>
+	<div class="container">	
     <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th> 
-          <th>Delete</th>  
-        </tr>
-        </thead>
-      <tbody>
-        <tr ng-repeat="(contactId, contact) in abCtrl.contacts">
-          <td><img class="ab-img" ng-src="{{contact.image}}"></td>
-          <td>{{contact.name}}</td>
-          <td>{{contact.email}}</td>
-          <td>{{contact.phone}}</td>
-          <td><button ng-click="abCtrl.removeContact(contactId)">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <a class="btn btn-primary" href="/#/">All Contacts</a>
+    <a class="btn btn-primary" href="/#/new">New Contact</a>
+    <div ng-view></div>
     </div>
 	</div>
   <script src='bower_components/jquery/dist/jquery.min.js'></script>
   <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
   <script src='bower_components/angularjs/angular.min.js'></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src='js/main.js'></script>
   </body>
 </html>

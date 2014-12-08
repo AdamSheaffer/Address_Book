@@ -1,7 +1,39 @@
 ;(function (){
   'use strict';
+   
+  angular.module('addressBook', ['ngRoute'])
+    .config(function($routeProvider){
+      $routeProvider
+      .when('/', {
+        templateUrl: 'views/table.html',
+        controller: 'addressBookController',
+        controllerAs: 'ab'
+    })
+    .when('/new', {
+      templateUrl : 'views/form.html',
+      controller: 'addressBookController',
+      controllerAs: 'ab'
+    })
+    .when('/:id', {
+      templateUrl: 'views/show.html',
+      controller: 'ShowController',
+      controllerAs: 'show'
+    })
+    .otherwise({redirectTo: '/'});
+    })
+   .controller("ShowController", function($http, $routeParams){
+      var vm = this;
+      var id = $routeParams.id;
+      $http.get("https://addressbookapp.firebaseio.com/contacts/" + id + ".json")
+        .success(function(data){
+          vm.contact = data;
+          console.log(vm.contact);
+        })
+        .error(function(err){
+          console.log(err);
+        });
+   })
 
-  angular.module('addressBook', [])
     .controller('addressBookController', function($http){
       var vm = this;
       
