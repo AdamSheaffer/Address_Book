@@ -14,7 +14,6 @@
       $http.post("https://addressbookapp.firebaseio.com/contacts.json", vm.newContact)
        .success(function(data){
         vm.contacts[data.name] = vm.newContact;
-        
         vm.newContact = null;
       	})
        .error(function(err){
