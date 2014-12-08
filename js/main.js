@@ -5,30 +5,34 @@
     .controller('addressBookController', function($http){
       var vm = this;
       
-      $http.get('https://stephania-volunteer.firebaseio.com/contacts.json')
+      $http.get("https://addressbookapp.firebaseio.com/contacts.json")
       .success(function(data){
         vm.contacts = data;
        });
 
       vm.addNewContact = function(){
-      $http.post('https://stephania-volunteer.firebaseio.com/contacts.json', vm.newContact)
-       .sucess(function(data){
-         vm.contacts[data.name] = vm.newContact;
-         vm.newContact = {};
-      	});
-        //vm.contacts.push(vm.newContact);
-        //vm.newContact = null;
-		//console.log("add new contact is firing. new info is:" + vm.newContact.name);
+      $http.post("https://addressbookapp.firebaseio.com/contacts.json", vm.newContact)
+       .success(function(data){
+        vm.contacts[data.name] = vm.newContact;
+        
+        vm.newContact = null;
+      	})
+       .error(function(err){
+       	  console.log(err);
+       });
+        
       };
      
      vm.removeContact = function(abId){
-       var url ="https://stephania-volunteer.firebaseio.com/" + abId + ".json";
-       $http.delet(url)
+       var url ="https://addressbookapp.firebaseio.com/contacts/" + abId + ".json";
+       $http.delete(url)
        .success(function(){
-         delete vm.contacts[ab];
+         delete vm.contacts[abId];
+         console.log(url);
+       })
+       .error(function(err){
+       	  console.log(err);
        });
-       //var index = vm.contacts.indexOf(contact);
-       //vm.contacts.splice(index, 1);
      }
       vm.newContact = {}
     });
