@@ -14,7 +14,7 @@
       $http.post('https://stephania-volunteer.firebaseio.com/contacts.json', vm.newContact)
        .sucess(function(data){
          vm.contacts[data.name] = vm.newContact;
-         vm.newContact = null;
+         vm.newContact = {};
       	});
         //vm.contacts.push(vm.newContact);
         //vm.newContact = null;
