@@ -1,7 +1,7 @@
 ;(function (){
   'use strict';
    
-  angular.module('addressBook', ['ngRoute'])
+  angular.module('addressBook', ['ngRoute', 'mgcrea.ngStrap'])
     .config(function($routeProvider){
       $routeProvider
       .when('/', {
@@ -19,6 +19,11 @@
       controller: 'ShowController',
       controllerAs: 'show'
     })
+    .when('/:id/edit', {
+      templateUrl: 'views/form.html',
+      controller: 'EditController',
+      controllerAs: 'ab'
+    })
     .otherwise({redirectTo: '/'});
     })
    .controller("ShowController", function($http, $routeParams){
@@ -33,8 +38,30 @@
           console.log(err);
         });
    })
+   .controller("EditController", function($http, $routeParams, $location){
+     var vm =  this;
+     var id = $routeParams.id;
+     var url = "https://addressbookapp.firebaseio.com/contacts/" + id + ".json"
+     $http.get(url)
+     .success(function(data){
+        vm.newCotact = data;
+     })
+     .error(function(err){
+        console.log(err);
+     });
 
-    .controller('addressBookController', function($http){
+     vm.addNewContact = function(){
+       $http.put(url, vm.newContact)
+         .success(function(data){
+            $location.path('/')
+         })
+         .error(function(err){
+          console.log(err);
+         });
+     };
+   })
+
+    .controller('addressBookController', function($http, $location){
       var vm = this;
       
       $http.get("https://addressbookapp.firebaseio.com/contacts.json")
