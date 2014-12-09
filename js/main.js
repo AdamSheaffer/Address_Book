@@ -44,7 +44,7 @@
      var url = "https://addressbookapp.firebaseio.com/contacts/" + id + ".json"
      $http.get(url)
      .success(function(data){
-        vm.newCotact = data;
+        vm.newContact = data;
      })
      .error(function(err){
         console.log(err);
