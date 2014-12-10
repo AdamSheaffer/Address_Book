@@ -67,11 +67,24 @@
         console.log(err);
       });
     }
+
+    function deleteAb(abId, cb){
+      var url = "https://addressbookapp.firebaseio.com/contacts/" + abId + ".json";
+      $http.delete(url)
+      .success(function(){
+        cb()
+      })
+      .error(function(err){
+        console.log(err);
+      });
+    }
+
     return {
       getAb: getAb,
       editAb: editAb,
       getAllAb: getAllAb,
-      createAb: createAb   
+      createAb: createAb,
+      deleteAb: deleteAb   
     };
   })
 
@@ -107,11 +120,9 @@
       };
      
      vm.removeContact = function(abId){
-       var url ="https://addressbookapp.firebaseio.com/contacts/" + abId + ".json";
-       $http.delete(url)
-       .success(function(){
+       abFactory.deleteAb(abId, function(){
          delete vm.contacts[abId];
-         console.log(url);
+         console.log(abId);
        });
      };
       vm.newContact = {}
