@@ -58,10 +58,20 @@
         console.log(err);
       });
     }
+    function createAb(contact, cb){
+      $http.post("https://addressbookapp.firebaseio.com/contacts.json", contact)
+      .success(function(data){
+        cb(data)
+      })
+      .error(function(err){
+        console.log(err);
+      });
+    }
     return {
       getAb: getAb,
       editAb: editAb,
-      getAllAb: getAllAb   
+      getAllAb: getAllAb,
+      createAb: createAb   
     };
   })
 
@@ -90,15 +100,10 @@
        });
 
       vm.addNewContact = function(){
-      $http.post("https://addressbookapp.firebaseio.com/contacts.json", vm.newContact)
-       .success(function(data){
+        abFactory.createAb(vm.newContact, function(data){
         vm.contacts[data.name] = vm.newContact;
         vm.newContact = null;
-      	})
-       .error(function(err){
-       	  console.log(err);
-       });
-        
+      	});
       };
      
      vm.removeContact = function(abId){
@@ -107,11 +112,8 @@
        .success(function(){
          delete vm.contacts[abId];
          console.log(url);
-       })
-       .error(function(err){
-       	  console.log(err);
        });
-     }
+     };
       vm.newContact = {}
     });
 })();
