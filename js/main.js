@@ -26,46 +26,66 @@
     })
     .otherwise({redirectTo: '/'});
     })
-   .controller("ShowController", function($http, $routeParams){
+  .factory('abFactory', function($http, $location){
+
+    function getAb(id, cb) {
+      var url = "https://addressbookapp.firebaseio.com/contacts/" + id + ".json";
+      $http.get(url)
+      .success(function(data){
+        cb(data);
+      })
+      .error(function(err){
+        console.log(err);
+    });
+  }
+    function editAb(id, ab){
+      var url = "https://addressbookapp.firebaseio.com/contacts/" + id + ".json";
+      $http.put(url, ab)
+      .success(function(data){
+        $location.path('/')
+      })
+      .error(function(err){
+        console.log(err);
+      });
+    };
+
+    function getAllAb(cb){
+      $http.get("https://addressbookapp.firebaseio.com/contacts.json")
+      .success(function(data){
+        cb(data);
+      })
+      .error(function(err){
+        console.log(err);
+      });
+    }
+    return {
+      getAb: getAb,
+      editAb: editAb,
+      getAllAb: getAllAb   
+    };
+  })
+
+   .controller("ShowController", function($routeParams, abFactory){
       var vm = this;
       var id = $routeParams.id;
-      $http.get("https://addressbookapp.firebaseio.com/contacts/" + id + ".json")
-        .success(function(data){
-          vm.contact = data;
-          console.log(vm.contact);
-        })
-        .error(function(err){
-          console.log(err);
-        });
-   })
-   .controller("EditController", function($http, $routeParams, $location){
+      abFactory.getAb(id, function(data){
+        vm.contact = data;
+      });
+    })
+   .controller("EditController", function($routeParams, abFactory){
      var vm =  this;
      var id = $routeParams.id;
-     var url = "https://addressbookapp.firebaseio.com/contacts/" + id + ".json"
-     $http.get(url)
-     .success(function(data){
+     abFactory.getAb(id, function(data){    
         vm.newContact = data;
-     })
-     .error(function(err){
-        console.log(err);
      });
 
      vm.addNewContact = function(){
-       $http.put(url, vm.newContact)
-         .success(function(data){
-            $location.path('/')
-         })
-         .error(function(err){
-          console.log(err);
-         });
-     };
+      abFactory.editAb(id, vm.newContact)
+    };
    })
-
-    .controller('addressBookController', function($http, $location){
+    .controller('addressBookController', function($http, abFactory){
       var vm = this;
-      
-      $http.get("https://addressbookapp.firebaseio.com/contacts.json")
-      .success(function(data){
+      abFactory.getAllAb(function(data){
         vm.contacts = data;
        });
 
