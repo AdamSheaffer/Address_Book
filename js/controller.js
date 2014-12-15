@@ -5,18 +5,32 @@
     var vm = this;
     vm.login = function(){
     var ref = new Firebase("https://addressbookapp.firebaseio.com");
-    ref.authWithPassword({
+      ref.authWithPassword({
+      email    : vm.email,
+      password : vm.password
+      }, function(error, authData) {
+        if (error === null) {
+          console.log("User logged in successfully", authData);
+        }else {
+          console.log("Error loggin user:", error);
+        }
+      });
+    }
+    var vm = this;
+    vm.register = function(){
+    var ref = new Firebase("https://addressbookapp.firebaseio.com");
+    ref.createUser({
     email    : vm.email,
     password : vm.password
     }, function(error, authData) {
       if (error === null) {
-        console.log("User logged in successfully", authData);
+        console.log("User created successfully", authData);
       } else {
-        console.log("Error loggin user:", error);
+        console.log("Error creating user:", error);
       }
-    });
-   }
-   })
+     });
+    };
+  })   
   .controller("ShowController", function($routeParams, abFactory){
       var vm = this;
       var id = $routeParams.id;
